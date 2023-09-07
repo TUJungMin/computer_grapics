@@ -182,6 +182,38 @@ void PirntLines_Press_PLUS(vector<string>& lines)
 	}
 }
 
+void PirntLines_Press_Minus(vector<string>& lines)
+{
+	for (int i = 0; i < lines.size(); ++i) {
+		string tempString;
+		for (int j = 0; j < lines[i].size(); ++j) {
+			if (isdigit(lines[i][j])) {
+				int num = atoi(&lines[i][j]);
+				char temp[20];
+				itoa(num, temp, 10);
+				for (int k = 0; temp[k] != NULL; ++k)
+				{
+					j++;
+					//lines[i][j]  = temp[k];
+				}
+				j--;
+				if (num > 0)
+				{
+					--num;
+				}
+				itoa(num, temp, 10);
+				for (int k = 0; temp[k] != NULL; ++k)
+					tempString.push_back(temp[k]);
+			}
+			else
+			{
+				tempString.push_back(lines[i][j]);
+			}
+		}
+		lines[i] = tempString;
+	}
+}
+
 
 
 void PirntLines_Press_F(vector<string>& lines)
@@ -317,7 +349,12 @@ int main() {
 			PirntLines(lines);
 			break;
 
+		case '-':
+			PirntLines_Press_Minus(lines);
+			PirntLines(lines);
+			break;
 		}
+
 
 	}
 
