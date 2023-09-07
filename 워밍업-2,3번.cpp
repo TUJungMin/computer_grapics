@@ -153,6 +153,7 @@ void swap(char& a, char& b) {
 	a = b;
 	b = temp;
 }
+
 void PirntLines_Press_PLUS(vector<string>& lines)
 {
 	for (int i = 0; i < lines.size(); ++i) {
@@ -248,7 +249,25 @@ vector<string> DivideIntoSegments(const string& lines, size_t segmentLength) {
 	return segments;
 }
 
+void ReverseWords(vector<string>& lines) {
+	for (string& line : lines) {
+		stringstream ss(line);
+		string word;
+		string reversedLine;
+		bool firstWord = true;
 
+		while (ss >> word) {
+			if (!firstWord) {
+				reversedLine += " "; // 공백을 추가하여 단어를 구분
+			}
+			reverse(word.begin(), word.end()); // 단어를 역순
+			reversedLine += word;
+			firstWord = false;
+		}
+
+		line = reversedLine; // 역순으로 만든 문자열로 기존 문자열을 대체
+	}
+}
 
 int main() {
 	string filename = "test.txt"; // 텍스트 파일의 경로와 이름을 지정해주세요.
@@ -291,7 +310,7 @@ int main() {
 			break;
 		case 'f':
 		{
-			vector<vector<string>> vecvecs;
+			/*vector<vector<string>> vecvecs;
 
 			for (const string& originalStr : lines) {
 				vector<string> segments = DivideIntoSegments(originalStr, 3);
@@ -307,9 +326,10 @@ int main() {
 					if (strSize != cnt) cout << "@@";
 				}
 				cout << endl;
-			}
+			}*/
 
-
+			ReverseWords(lines);
+			PirntLines(lines);
 			//PirntLines_Press_F(lines); 이거 두개도 사용 가능~
 			//PirntLines_Press_E(lines);
 			break;
