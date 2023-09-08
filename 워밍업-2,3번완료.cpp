@@ -216,39 +216,6 @@ void PirntLines_Press_Minus(vector<string>& lines)
 }
 
 
-
-void PirntLines_Press_F(vector<string>& lines)
-{
-
-	for (int i = 0; i < lines.size(); ++i) {
-		for (int j = 0; j < lines[i].size(); j += 3) {
-			if (j + 2 < lines[i].size()) {
-				swap(lines[i][j], lines[i][j + 2]);
-			}
-			else if (j + 2 > lines[i].size()) {
-				swap(lines[i][j], lines[i][j + 1]);
-			}
-
-		}
-
-	}
-
-
-}
-
-vector<string> DivideIntoSegments(const string& lines, size_t segmentLength) {
-	vector<string> segments;
-	size_t startPos = 0;
-
-	while (startPos < lines.size()) {
-		string segment = lines.substr(startPos, segmentLength);
-		reverse(segment.begin(), segment.end()); // Reverse the segments
-		segments.push_back(segment);
-		startPos += segmentLength;
-	}
-	return segments;
-}
-
 void ReverseWords(vector<string>& lines) {
 	for (string& line : lines) {
 		stringstream ss(line);
@@ -310,28 +277,11 @@ int main() {
 			break;
 		case 'f':
 		{
-			/*vector<vector<string>> vecvecs;
-
-			for (const string& originalStr : lines) {
-				vector<string> segments = DivideIntoSegments(originalStr, 3);
-				vecvecs.push_back(segments);
-
-			}
-			for (const vector<string>& segments : vecvecs) {
-				size_t strSize = segments.size();
-				int cnt = 0;
-				for (const string& segment : segments) {
-					cout << segment;
-					cnt++;
-					if (strSize != cnt) cout << "@@";
-				}
-				cout << endl;
-			}*/
+			
 
 			ReverseWords(lines);
 			PirntLines(lines);
-			//PirntLines_Press_F(lines); 이거 두개도 사용 가능~
-			//PirntLines_Press_E(lines);
+			
 			break;
 		}
 		case 'h':

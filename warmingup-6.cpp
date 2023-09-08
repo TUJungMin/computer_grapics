@@ -2,14 +2,15 @@
 #include <vector>
 #include <cstdlib>
 #include <ctime>
+#include <iomanip>
 
 using namespace std;
 
-#define SIZE 10
+#define SIZE 40
 #define MAX_CONSECUTIVE_MOVES 5
 
 void generateRandomPath(int maze[][SIZE]) {
-    srand(time(NULL));
+    srand((unsigned)time(NULL));
 
     int x = 0, y = 0; // 시작점
     int value = 1; // 시작값
@@ -93,7 +94,7 @@ void generateRandomPath(int maze[][SIZE]) {
 void printMaze(int maze[][SIZE]) {
     for (int i = 0; i < SIZE; ++i) {
         for (int j = 0; j < SIZE; ++j) {
-            cout << maze[i][j] << "\t";
+            cout <<setw(5)<<maze[i][j];
         }
         cout << endl;
     }

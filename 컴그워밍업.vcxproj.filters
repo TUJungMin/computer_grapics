@@ -18,22 +18,19 @@
     <ClCompile Include="워밍업-1번완료.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="워밍업-2,3번.cpp">
+    <ClCompile Include="워밍업-2,3번완료.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="워밍업-4번.cpp">
+    <ClCompile Include="워밍업연습.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="워밍업-5번완료.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="워밍업-6.cpp">
+    <ClCompile Include="워밍업-4번완료.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="warmingup-6.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="소스.cpp">
+    <ClCompile Include="워밍업-5번.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
