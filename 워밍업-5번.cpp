@@ -1,89 +1,183 @@
 #include <iostream>
 #include <string>
+#include <array>
+#include <algorithm>
+#include <vector>
+#include <random>
 #include <windows.h>
-#include <time.h>
-#include <stdlib.h>
 using namespace std;
 
-typedef struct map 
+struct map
 {
 	char concealShape = '*';
 	char shape;
 	char realshape = 'd';
-	bool appear;
+
 	int color;
-	
-}map;
+
+};
+
+struct Card {
+	int color;
+	char alpha;
+	//bool appear;
+};
+
+struct DATA {
+	Card* data;
+	bool appear;
+};
 
 
-void initializeBoard(map board[][4])
+void initializeBoard(array <DATA, 16>& board, Card* card)
 {
-	srand((unsigned)time(NULL));
-	int colorNum[16] = { 0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7 };
-	for (int i = 15; i > 0; i--) {
-		int j = rand() % (i + 1);
-		swap(colorNum[i], colorNum[j]);
+	//srand((unsigned)time(NULL));
+	std::random_device rd;
+	std::default_random_engine dre(rd());
+	vector <int> colorNum = { 1,2,3,4,5,6,7,8 };
+	shuffle(colorNum.begin(), colorNum.end(), dre);
+	char AlphaNum[8] = { 'A','B','C','D','E','F','G','H' };
+	for (int i = 0; i < 8; i++) {
+		//card[i].appear = false;
+		card[i].alpha = AlphaNum[i];
+		card[i].color = colorNum[i];
 	}
-	char AlphaNum[16] = { 'A','A','B','B','C','C','D','D','E','E','F','F','G','G','H','H'};
-	for (int i = 15; i > 0; i--) {
+	for (int i = 0; i < 8; i++) {
+		board[2 * i].appear = false;
+		board[2 * i + 1].appear = false;
+		board[2*i].data = &card[i];
+		board[2*i + 1].data = &card[i];
+	}
+	shuffle(board.begin(), board.end(), dre);
+	for (int i = 7; i > 0; i--) {
 		int j = rand() % (i + 1);
 		swap(AlphaNum[i], AlphaNum[j]);
 	}
-	for (int i = 0; i < 4; ++i) {
-		for (int j = 0; j < 4; ++j) {
-			board[i][j].appear = false;
-			board[i][j].shape = AlphaNum[4 * i + j];
-			board[i][j].color = colorNum[4 * i + j];
-		}
-	}
-	
+
+
 }
-void PrintALL(const map board[][4])
+void PrintALL(const array <DATA, 16>& board,const int &score)
 {
+	cout << "SCORE: "<<score << endl;
 	cout << "\t" << "a\t" << "b\t" << "c\t" << "d" << endl;
-	cout << "1\t" << board[0][0].realshape << "\t" << board[0][1].realshape << "\t" << board[0][2].realshape << "\t" << board[0][3].realshape << endl;
-	cout << "2\t" << board[1][0].realshape << "\t" << board[1][1].realshape << "\t" << board[1][2].realshape << "\t" << board[1][3].realshape << endl;
-	cout << "3\t" << board[2][0].realshape << "\t" << board[2][1].realshape << "\t" << board[2][2].realshape << "\t" << board[2][3].realshape << endl;
-	cout << "4\t" << board[3][0].realshape << "\t" << board[3][1].realshape << "\t" << board[3][2].realshape << "\t" << board[3][3].realshape << endl;
+	for (int i = 0; i < 4; ++i) {
+		cout << i + 1 << "\t";
+		for (int j = 0; j < 4; ++j) {
+			if (board[4 * i + j].appear == false) {
+				cout << "*" << "\t";
+			}
+			else {
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), board[4 * i + j].data->color);
+				cout << board[4 * i + j].data->alpha << "\t";
+			}
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+		}
+		cout << endl;
+	}
+
+
+	
 
 }
 
-void gamestart(const char raw1, const char raw2, const int col1, const int col2, map board[][4])
+void gamestart(array <DATA, 16>& board,int &score)
 {
+	int turn = 0;
+	int col1, col2;
+	char order, raw1, raw2;
+	cout << "input card1: ";
+	cin >> raw1 >> col1;
+	if (((raw1 < 'a' || raw1>'d') || (col1 < 1 || col1 >> 4))) {
+		cout << "잘못입력했습니다 다시입력하세요!!!" << endl;
+	}
+
+	cout << "input card2: ";
+	cin >> raw2 >> col2;
+	if (((raw2 < 'a' || raw2>'d') || (col2 < 1 || col2 >> 4))) {
+		cout << "잘못입력했습니다 다시입력하세요!!!" << endl;
+	}
 	int rawnum1, rawnum2;
 	switch (raw1) {
 
 	case 'a':
 		rawnum1 = 0;
 		break;
+	case 'b':
+		rawnum1 = 1;
+		break;
+	case 'c':
+		rawnum1 = 2;
+		break;
+	case 'd':
+		rawnum1 = 3;
+		break;
 	}
 
+	switch (raw2) {
+
+	case 'a':
+		rawnum2 = 0;
+		break;
+	case 'b':
+		rawnum2 = 1;
+		break;
+	case 'c':
+		rawnum2 = 2;
+		break;
+	case 'd':
+		rawnum2 = 3;
+		break;
+	}
+	board[4 * (col1 - 1) + rawnum1].appear = true;
+	board[4 * (col2 - 1) + rawnum2].appear = true;
+	PrintALL(board,score);
+	turn++;
+	cout << "턴 수 :" << turn << endl;
+	score--;
+	cout << endl << endl;
+
+	board[4 * (col1 - 1) + rawnum1].appear = false;
+	board[4 * (col2 - 1) + rawnum2].appear = false;
+	if (board[4 * (col1 - 1) + rawnum1].data->alpha == board[4 * (col2 - 1) + rawnum2].data->alpha) {
+		board[4 * (col1 - 1) + rawnum1].appear = true;
+		board[4 * (col2 - 1) + rawnum2].appear = true;
+		score++;
+		score += 20;
+	}
 }
 
 
 int main()
 {
-	map board[4][4];
-	initializeBoard(board);
-	char raw1, raw2;
-	int col1, col2;
-	while (1) {
-		PrintALL(board);
-		cout << "input card1: ";
-		cin >> raw1 >> col1;
-		if (((raw1 < 'a' || raw1>'d') || (col1 < 1 || col1 >> 4))) {
-			cout << "잘못입력했습니다 다시입력하세요!!!" << endl;
-			continue;
-		}
-		
-		cout << "input card2: ";
-		cin >> raw2 >> col2;
-		if (((raw2 < 'a' || raw2>'d') || (col2 < 1 || col2 >> 4))) {
-			cout << "잘못입력했습니다 다시입력하세요!!!" << endl;
-			continue;
-		}
 
-		PrintALL(board);
-	}
+	Card card[8];
+	array <DATA, 16> board;		//배열이 아니라 클래스이다!!
+	int score = 10;
 	
+	initializeBoard(board, card);
+	char order;
+	
+		PrintALL(board,score);
+	
+	while (1) {
+		cout << "명령어를 입력해주세요(r:재시작 s:시작 q:종료 ): ";
+		cin >> order;
+		switch (order)
+		{
+		case 'r':
+			initializeBoard(board, card);
+			break;
+		case 'q':
+			cout << "프로그램을 종료합니다!!" << endl;
+			return 0;
+		default:
+			cout << "Invalid!!!!" << endl;
+			continue;
+		case 's':
+			gamestart(board,score);
+			break;
+		}
+		PrintALL(board,score);
+	}
+
 }
