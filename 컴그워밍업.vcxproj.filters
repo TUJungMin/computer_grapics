@@ -30,7 +30,10 @@
     <ClCompile Include="warmingup-6.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="워밍업-5번.cpp">
+    <ClCompile Include="워밍업-5번완료.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="워밍업-6번.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
