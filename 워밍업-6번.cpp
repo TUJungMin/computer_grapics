@@ -1,7 +1,7 @@
 ﻿#include <iostream>
 
 using namespace std;
-#define size 30
+#define SIZE 30
 struct Point {
 	int x;
 	int y;
@@ -17,8 +17,8 @@ struct Rect {
 
 void initializeBoard(char board[][30], Rect& rect)
 {
-	for (int i = 0; i < size; i++) {
-		for (int j = 0; j < size; ++j) {
+	for (int i = 0; i < SIZE; i++) {
+		for (int j = 0; j < SIZE; ++j) {
 			board[i][j] = '.';
 		}
 	}
@@ -49,8 +49,8 @@ void initializeBoard(char board[][30], Rect& rect)
 }
 void PrintAll(char board[][30])
 {
-	for (int i = 0; i < size; i++) {
-		for (int j = 0; j < size; ++j) {
+	for (int i = 0; i < SIZE; i++) {
+		for (int j = 0; j < SIZE; ++j) {
 			cout << board[i][j] << "  ";
 		}
 		cout << endl;
@@ -69,12 +69,12 @@ void checkrect(Rect& rect)
 		rect.LT.y += 30;
 		rect.RB.y += 30;
 	}
-	if (rect.LT.x > size && rect.RB.x > size)
+	if (rect.LT.x > SIZE && rect.RB.x > SIZE)
 	{
 		rect.LT.x -= 30;
 		rect.RB.x -= 30;
 	}
-	if (rect.LT.y > size && rect.RB.y > size)
+	if (rect.LT.y > SIZE && rect.RB.y > SIZE)
 	{
 		rect.LT.y -= 30;
 		rect.RB.y -= 30;
@@ -84,8 +84,8 @@ void moveboard(char board[][30], Rect& rect)
 {
 	int num_y;
 	int num_x;
-	for (int i = 0; i < size; i++) {
-		for (int j = 0; j < size; ++j) {
+	for (int i = 0; i < SIZE; i++) {
+		for (int j = 0; j < SIZE; ++j) {
 			board[i][j] = '.';
 		}
 
@@ -96,19 +96,19 @@ void moveboard(char board[][30], Rect& rect)
 
 	for (int i = rect.LT.y; i <= rect.RB.y; ++i) {	//3	4
 		for (int j = rect.LT.x; j <= rect.RB.x; ++j) {	//1	3
-			if (j % size < 0)
+			if (j % SIZE < 0)
 			{
-				num_x = size + (j % size);
+				num_x = SIZE + (j % SIZE);
 			}
 			else {
-				num_x = j % size;
+				num_x = j % SIZE;
 			}
-			if (i % size < 0)
+			if (i % SIZE < 0)
 			{
-				num_y = size + (i % size);
+				num_y = SIZE + (i % SIZE);
 			}
 			else {
-				num_y = i % size;
+				num_y = i % SIZE;
 			}
 			board[num_y][num_x] = '0';
 		}
@@ -140,14 +140,14 @@ void gamestart(char board[][30], Rect& rect)
 		break;
 	case 'S':
 		if (rect.LT.x <= rect.RB.x) {
-			if (rect.RB.x >= size) {
+			if (rect.RB.x >= SIZE) {
 				rect.LT.x--;
 			}
 			else
 				rect.RB.x++;
 		}
 		if(rect.LT.y <= rect.RB.y)
-		if (rect.RB.y >= size ) {
+		if (rect.RB.y >= SIZE ) {
 			rect.LT.y--;
 		}
 		else
@@ -160,7 +160,7 @@ void gamestart(char board[][30], Rect& rect)
 			if (rect.LT.x < 0) {
 				rect.RB.x--;
 			}
-			else if (rect.RB.x > size)
+			else if (rect.RB.x > SIZE)
 				rect.LT.x++;
 			else
 				rect.RB.x--;
@@ -169,7 +169,7 @@ void gamestart(char board[][30], Rect& rect)
 			if (rect.LT.y < 0 && rect.LT.y < rect.RB.y) {
 				rect.RB.y--;
 			}
-			else if (rect.RB.y > size && rect.LT.y < rect.RB.y)
+			else if (rect.RB.y > SIZE && rect.LT.y < rect.RB.y)
 				rect.LT.y++;
 			else
 				rect.RB.y--;
@@ -179,7 +179,7 @@ void gamestart(char board[][30], Rect& rect)
 
 	case 'i':
 		if (rect.LT.x <= rect.RB.x) {
-			if (rect.RB.x >= size) {
+			if (rect.RB.x >= SIZE) {
 				rect.LT.x--;
 			}
 			else
@@ -191,7 +191,7 @@ void gamestart(char board[][30], Rect& rect)
 			if (rect.LT.x < 0) {
 				rect.RB.x--;
 			}
-			else if (rect.RB.x > size)
+			else if (rect.RB.x > SIZE)
 				rect.LT.x++;
 			else
 				rect.RB.x--;
@@ -199,7 +199,7 @@ void gamestart(char board[][30], Rect& rect)
 		break;
 	case 'k':
 		if (rect.LT.y <= rect.RB.y)
-			if (rect.RB.y >= size) {
+			if (rect.RB.y >= SIZE) {
 				rect.LT.y--;
 			}
 			else
@@ -211,7 +211,7 @@ void gamestart(char board[][30], Rect& rect)
 			if (rect.LT.y < 0 && rect.LT.y < rect.RB.y) {
 				rect.RB.y--;
 			}
-			else if (rect.RB.y > size && rect.LT.y < rect.RB.y)
+			else if (rect.RB.y > SIZE && rect.LT.y < rect.RB.y)
 				rect.LT.y++;
 			else
 				rect.RB.y--;
