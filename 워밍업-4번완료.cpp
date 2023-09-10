@@ -105,7 +105,7 @@ int main()
 {
 	char order;
 	store_list list[10];
-	int size = 0;
+	int SIZE = 0;
 	bool toggle_S = false;
 	while (true) {
 		cout << "명령어를 입력하세요 : ";
@@ -115,35 +115,35 @@ int main()
 			{
 			case '+':
 			{
-				int max_size = size;
-				if (size != 0) {
-					for (int i = 0; i < size; ++i) {
+				int max_size = SIZE;
+				if (SIZE != 0) {
+					for (int i = 0; i < SIZE; ++i) {
 						if (list[i].full == false) {
-							size = i;
+							SIZE = i;
 							break;
 						}
 					}
 				}
-				cin >> list[size].num1 >> list[size].num2 >> list[size].num3;
-				list[size].full = true;
-				size = max_size;
-				size++;
+				cin >> list[SIZE].num1 >> list[SIZE].num2 >> list[SIZE].num3;
+				list[SIZE].full = true;
+				SIZE = max_size;
+				SIZE++;
 				//리스트의 맨 위에 입력
 
 			}
 			PrintAll(list);
 				break;
 			case 'e':
-				if (size != 0) {
-					for (int a = size-1; a >= 0; a--) {
+				if (SIZE != 0) {
+					for (int a = SIZE-1; a >= 0; a--) {
 						if (a != 9) {
 							list[a + 1] = list[a];
 						}
 					}
 				}
 				cin >> list[0].num1 >> list[0].num2 >> list[0].num3;
-				list[size].full = true;
-				size++;
+				list[SIZE].full = true;
+				SIZE++;
 				//리스트의 맨 아래에 입력
 				PrintAll(list);
 				break;
@@ -155,8 +155,8 @@ int main()
 					}
 				}
 				
-				if (size > 0) {
-					size--;
+				if (SIZE > 0) {
+					SIZE--;
 				}
 				//리스트의 맨 위에서 삭제한다.
 				PrintAll(list);
@@ -169,14 +169,14 @@ int main()
 						break;
 					}
 				}
-				if (size > 0) {
-					size--;
+				if (SIZE > 0) {
+					SIZE--;
 				}
 				// 리스트의 맨 아래에서 삭제한다. (리스트에서 삭제된 칸이 비어있다.)
 				PrintAll(list);
 				break;
 			case 'l':
-				cout << "리스트의 길이 : " << size;
+				cout << "리스트의 길이 : " << SIZE;
 				PrintAll(list);
 				// 리스트에 저장된 점의 개수를 출력한다.
 				break;
@@ -184,7 +184,7 @@ int main()
 				for (int i = 0; i < 10;++i) {
 					list[i].full = false;
 				}
-				size = 0;
+				SIZE = 0;
 				PrintAll(list);
 				// 리스트를 비운다. 리스트를 비운 후 다시 입력하면 0번부터 저장된다.
 				break;
