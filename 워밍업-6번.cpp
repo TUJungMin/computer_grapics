@@ -13,8 +13,6 @@ struct Rect {
 };
 
 
-
-
 void initializeBoard(char board[][30], Rect& rect)
 {
 	for (int i = 0; i < SIZE; i++) {

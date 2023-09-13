@@ -13,6 +13,7 @@ struct Coord {
     int y;
 };
 void makeline(char maze[][SIZE], vector <Coord>& turncoord, int &turn) {
+    turncoord.clear();
     turn = 0;
     int direction = 0;
     int x = 0, y = 0;
@@ -103,11 +104,12 @@ void printMaze(char maze[][SIZE], vector <Coord>& turncoord,const bool& start, c
         for (int j = 0; j < SIZE; ++j) {
           
             if (start) {
+               
                 maze[turncoord[turn].y][turncoord[turn].x] = '*';
             }
             else
             {
-                maze[turncoord[turn].y][turncoord[turn].x] = '0';
+              //  maze[turncoord[turn].y][turncoord[turn].x] = '0';
             }
             if (maze[i][j] == '1')
             {
@@ -122,11 +124,11 @@ void printMaze(char maze[][SIZE], vector <Coord>& turncoord,const bool& start, c
                 SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 5);
             }
             cout << maze[i][j] << " ";
-           
+            maze[turncoord[turn].y][turncoord[turn].x] = '0';
         }
         cout << endl;
     }
-    maze[turncoord[turn].y][turncoord[turn].x] = '0';
+   
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 }
 
@@ -153,6 +155,7 @@ int main() {
             
             break;
         case '+':
+            case '=':
             if (turn < turncoord.size())
             {
                 turn++;

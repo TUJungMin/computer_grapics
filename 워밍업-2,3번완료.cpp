@@ -156,9 +156,9 @@ void swap(char& a, char& b) {
 
 void PirntLines_Press_PLUS(vector<string>& lines)
 {
-	for (int i = 0; i < lines.SIZE(); ++i) {
+	for (int i = 0; i < lines.size(); ++i) {
 		string tempString;
-		for (int j = 0; j < lines[i].SIZE(); ++j) {
+		for (int j = 0; j < lines[i].size(); ++j) {
 			if (isdigit(lines[i][j])) {
 				int num = atoi(&lines[i][j]);
 				char temp[20];
@@ -185,9 +185,9 @@ void PirntLines_Press_PLUS(vector<string>& lines)
 
 void PirntLines_Press_Minus(vector<string>& lines)
 {
-	for (int i = 0; i < lines.SIZE(); ++i) {
+	for (int i = 0; i < lines.size(); ++i) {
 		string tempString;
-		for (int j = 0; j < lines[i].SIZE(); ++j) {
+		for (int j = 0; j < lines[i].size(); ++j) {
 			if (isdigit(lines[i][j])) {
 				int num = atoi(&lines[i][j]);
 				char temp[20];
@@ -287,7 +287,7 @@ int main() {
 		case 'h':
 			for (auto& line : lines) {
 				int startPos = 0;
-				int endPos = line.SIZE() - 1;
+				int endPos = line.size() - 1;
 				int prevStartPos = 0;
 				string same_word;
 				while (true) {
@@ -307,7 +307,7 @@ int main() {
 					}
 
 				}
-				if (same_word.SIZE() > 1) {
+				if (same_word.size() > 1) {
 					cout << line << ": " << same_word << endl;
 				}
 				else
